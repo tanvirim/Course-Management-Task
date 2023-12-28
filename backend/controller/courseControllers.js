@@ -1,21 +1,20 @@
-const Courses = require("../model/courseSchema");
-const express = require("express");
+const Courses = require('../model/courseSchema');
+const express = require('express');
 const app = express();
 app.use(express.json());
 
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const getCourse = async (req, res) => {
-  const course = await Courses.find( );
+  const course = await Courses.find();
   res.send(course);
 };
 
 const postCourse = async (req, res) => {
   const { name, description, price, duration, level, topics, schedule } =
     req.body;
-
 
   const course = await Courses.create({
     name,
@@ -32,13 +31,16 @@ const postCourse = async (req, res) => {
 };
 
 const getSpecificCourse = async (req, res) => {
-  const course = await Courses.findById(req.params.id);
-  if (!course) {
-    res.status(404).send("'not  found..sorry..");
-    throw new Error("'not  found..sorry..");
+  try {
+    const course = await Courses.findById(req.params.id);
+    if (!course) {
+      return res.status(404).send('Course not found.');
+    }
+    res.send(course);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
   }
-
-  res.send(course);
 };
 
 const updateCourse = async (req, res) => {
