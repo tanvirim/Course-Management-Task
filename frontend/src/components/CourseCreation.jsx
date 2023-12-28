@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-time-picker/dist/TimePicker.css';
 
@@ -33,6 +34,26 @@ const CourseForm = () => {
       classTime: '',
     },
   });
+
+  useEffect(() => {
+    // Decode the token and extract user details
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token, 'shahriar123');
+
+        console.log('decoded', decodedToken);
+        // Assuming the token has a field 'userId' with the user ID
+        const userIdFromToken = decodedToken.user.id;
+        setFormData((prevData) => ({
+          ...prevData,
+          user_id: userIdFromToken,
+        }));
+      } catch (error) {
+        console.error('Token decoding failed:', error);
+      }
+    }
+  }, []); // Run this effect only once on component mount
 
   const [submitting, setSubmitting] = useState(false);
 
@@ -132,17 +153,6 @@ const CourseForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <Stack spacing={4}>
-        <FormControl isRequired>
-          <FormLabel>User ID</FormLabel>
-          <Input
-            type='text'
-            placeholder='User ID'
-            name='user_id'
-            value={formData.user_id}
-            onChange={handleChange}
-          />
-        </FormControl>
-
         <FormControl isRequired>
           <FormLabel>Name</FormLabel>
           <Input

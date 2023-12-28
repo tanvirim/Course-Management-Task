@@ -1,5 +1,5 @@
 // courseStore.js
-import create from 'zustand';
+import { create } from 'zustand';
 
 const useCourseNameStore = create((set) => ({
   courses: [],
