@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useCourseNameStore from '../store/caourseNames';
 
-const CourseList = () => {
+const CourseNames = () => {
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   const { courses, fetchCourses } = useCourseNameStore((state) => state);
 
@@ -12,12 +14,11 @@ const CourseList = () => {
   }, [fetchCourses]);
 
   useEffect(() => {
-    // Update filtered courses when the 'courses' change
     setFilteredCourses(courses);
   }, [courses]);
 
   const handleCourseClick = (courseId) => {
-    console.log('Clicked on course with ID:', courseId);
+    navigate(`/course-details/${courseId}`);
   };
 
   const handleSearchChange = (e) => {
@@ -50,4 +51,4 @@ const CourseList = () => {
   );
 };
 
-export default CourseList;
+export default CourseNames;

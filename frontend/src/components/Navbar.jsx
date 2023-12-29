@@ -1,20 +1,17 @@
 import { Link } from 'react-router-dom';
 import Logout from './Logout';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useAuthStore } from '../store/authStore';
 
 const Navbar = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem('token')
-  );
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
   useEffect(() => {
-    setIsAuthenticated(!!localStorage.getItem('token'));
-  }, [isAuthenticated]);
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsAuthenticated(false);
-  };
+    // This effect will trigger whenever isLoggedIn changes
+    console.log('isLoggedIn changed:', isLoggedIn);
+    // Perform any actions or UI updates based on isLoggedIn changes
+    // For example, you can update the Navbar UI or trigger some side effects
+  }, [isLoggedIn]);
 
   return (
     <nav className='bg-red-400 p-4'>
@@ -24,26 +21,26 @@ const Navbar = () => {
             Home
           </Link>
         </li>
-        {isAuthenticated && (
+        {isLoggedIn && (
           <li>
             <Link to='/dashboard' className='text-white hover:text-gray-200'>
               Dashboard
             </Link>
           </li>
         )}
-        {isAuthenticated && (
+        {isLoggedIn && (
           <li>
-            <Logout onLogout={handleLogout} />
+            <Logout />
           </li>
         )}
-        {!isAuthenticated && (
+        {!isLoggedIn && (
           <li>
             <Link to='/login' className='text-white hover:text-gray-200'>
               Login
             </Link>
           </li>
         )}
-        {!isAuthenticated && (
+        {!isLoggedIn && (
           <li>
             <Link to='/register' className='text-white hover:text-gray-200'>
               Register

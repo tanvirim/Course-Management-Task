@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useAuthStore } from '../store/authStore';
 
 const Login = () => {
+  const login = useAuthStore((state) => state.login);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -33,19 +33,17 @@ const Login = () => {
 
       if (localStorage.getItem('token')) {
         navigate('/dashboard');
-        toast.success('Login successful'); // Display success toast
+        login();
       }
 
       console.log('Login successful:', response.data);
     } catch (error) {
       console.error('Login failed:', error);
-      toast.error('Login failed. Please try again.'); // Display error toast
     }
   };
 
   return (
     <div>
-      <ToastContainer /> {/* Toast container for displaying notifications */}
       <form onSubmit={handleLogin} className='flex flex-col items-center mt-8'>
         <input
           className='border rounded px-3 py-2 mb-4'

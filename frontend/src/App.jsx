@@ -10,6 +10,7 @@ import Login from './components/Login';
 import Registration from './components/Register';
 import Home from './pages/Home';
 import DashBoard from './pages/DashBoard';
+import CourseDetails from './components/CourseDetails';
 
 const App = () => {
   const isAuthenticated = !!localStorage.getItem('token');
@@ -28,6 +29,7 @@ const App = () => {
               isAuthenticated ? <DashBoard /> : <Navigate replace to='/login' />
             }
           />
+          <Route path='/course-details/:courseId' element={<CourseDetails />} />
         </Routes>
         <Footer />
       </div>
