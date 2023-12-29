@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
 import { baseUrl } from '../api/url';
-
+import { toast } from 'react-toastify';
 const Login = () => {
   const { login, isLoggedIn } = useAuthStore((state) => state);
   const [email, setEmail] = useState('');
@@ -17,6 +17,10 @@ const Login = () => {
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/dashboard');
+      toast.success('login successfully!', {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
     }
   }, [isLoggedIn]);
 

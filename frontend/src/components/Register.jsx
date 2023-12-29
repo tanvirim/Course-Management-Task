@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../api/url';
-
+import { toast } from 'react-toastify';
 const Registration = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -33,6 +33,10 @@ const Registration = () => {
       if (response.status === 201) {
         console.log('Registration successful:', response.data);
         navigate('/login');
+        toast.success('Registration successfully!', {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000,
+        });
       }
     } catch (error) {
       console.error('Registration failed:', error);

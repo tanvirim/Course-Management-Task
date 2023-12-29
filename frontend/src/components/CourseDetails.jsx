@@ -27,22 +27,18 @@ const CourseDetails = () => {
   }, [courseId]);
 
   return (
-    <Box p={8} bg='gray.200' minH='100vh'>
-      <Heading as='h2' mb={4} fontSize='2xl' textAlign='center'>
-        Course Details
-      </Heading>
+    <Box minH='100vh'>
       {course ? (
         <Flex direction='column' alignItems='center'>
-          <Box
-            bg='white'
-            p={6}
-            borderRadius='md'
-            boxShadow='md'
-            mb={4}
-            w='400px'
-            maxW='90%'
-          >
-            <Heading as='h3' mb={2} fontSize='xl'>
+          <Box className=' flex flex-col gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
+            <Heading
+              as='h2'
+              textAlign='center'
+              className='text-blue-500 text-2xl font-semibold p-2'
+            >
+              Course Details
+            </Heading>
+            <Heading as='h3' className='text-2xl '>
               {course.name}
             </Heading>
             <Text mb={2}>Description: {course.description}</Text>
@@ -54,9 +50,7 @@ const CourseDetails = () => {
             <Text>End Date: {course.schedule.endDate}</Text>
             <Text>Class Days: {course.schedule.classDays}</Text>
             <Text>Class Time: {course.schedule.classTime}</Text>
-            {/* Display other course details */}
           </Box>
-          {/* Add more Box components for other properties */}
         </Flex>
       ) : (
         <Text>Loading course details...</Text>

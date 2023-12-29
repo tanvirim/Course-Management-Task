@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-time-picker/dist/TimePicker.css';
-
+import { toast } from 'react-toastify';
 import {
   FormControl,
   FormLabel,
@@ -21,6 +21,7 @@ import useCourseStore from '../store/courseStore';
 
 const CourseForm = () => {
   const fetchCourses = useCourseStore((state) => state.fetchCourses);
+  const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     user_id: '',
     name: '',
@@ -55,8 +56,6 @@ const CourseForm = () => {
       }
     }
   }, []);
-
-  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -135,15 +134,17 @@ const CourseForm = () => {
             classTime: '',
           },
         });
+        toast.success('Course added successfully!', {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000,
+        });
       } else {
         console.error('Course upload failed:', response.statusText);
         setSubmitting(false);
-        // Handle error scenario based on the response status
       }
     } catch (error) {
       console.error('Error uploading course:', error);
       setSubmitting(false);
-      // Handle error scenario
     }
   };
 
