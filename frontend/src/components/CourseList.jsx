@@ -11,15 +11,18 @@ const CourseList = () => {
   }, [fetchCourses]);
 
   return (
-    <div className='flex flex-wrap justify-center gap-6 mt-16'>
-      {courses.map((course) => (
-        <div
-          key={course._id}
-          className='max-w-xs border rounded-lg overflow-hidden shadow-md'
-        >
-          <CourseCard course={course} />
-        </div>
-      ))}
+    <div className='flex flex-col  items-center'>
+      <h1 className='text-3xl mt-8'>Available Courses</h1>
+      <div className='flex flex-wrap justify-center gap-6 mt-8'>
+        {courses.map((course) => (
+          <div
+            key={course._id}
+            className='max-w-xs border rounded-lg overflow-hidden shadow-md'
+          >
+            <CourseCard course={course} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
