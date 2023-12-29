@@ -3,7 +3,7 @@ import CourseNames from '../components/CourseNames';
 
 const DashBoard = () => {
   return (
-    <div className='flex w-full h-screen overflow-hidden'>
+    <div className='flex w-full h-auto overflow-hidden'>
       <div className='w-1/2 flex justify-center'>
         <CourseNames />
       </div>

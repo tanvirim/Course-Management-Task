@@ -30,6 +30,7 @@ const CourseNames = () => {
 
   return (
     <div className='mt-8'>
+      <p className='text-2xl py-4'>Search Course</p>
       <input
         type='text'
         placeholder='Search courses...'
@@ -40,6 +41,7 @@ const CourseNames = () => {
       />
 
       <ul className='space-y-2'>
+        <p className='text-2xl py-4'>Course Lists</p>
         {filteredCourses.map((course) => (
           <li
             key={course._id}

@@ -11,7 +11,7 @@ const CourseList = () => {
   }, [fetchCourses]);
 
   return (
-    <div className='flex flex-wrap justify-center gap-6'>
+    <div className='flex flex-wrap justify-center gap-6 mt-16'>
       {courses.map((course) => (
         <div
           key={course._id}

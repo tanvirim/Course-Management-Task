@@ -148,8 +148,12 @@ const CourseForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className=''>
+    <form
+      onSubmit={handleSubmit}
+      className='max-w-3xl  p-6 bg-gray-100 rounded-lg shadow-md mt-10'
+    >
       <Stack spacing={4}>
+        <p className='text-3xl '> Add Course</p>
         <FormControl isRequired>
           <FormLabel>Name</FormLabel>
           <Input
@@ -158,6 +162,7 @@ const CourseForm = () => {
             name='name'
             value={formData.name}
             onChange={handleChange}
+            className='w-[400px] h-[40px] p-4 rounded-md mt-2'
           />
         </FormControl>
 
@@ -168,17 +173,19 @@ const CourseForm = () => {
             name='description'
             value={formData.description}
             onChange={handleChange}
+            className='w-[400px] h-[100px] p-4 rounded-md'
           />
         </FormControl>
 
         <FormControl isRequired>
           <FormLabel>Price</FormLabel>
           <Input
-            type='text'
+            type='number'
             placeholder='Course Price'
             name='price'
             value={formData.price}
             onChange={handleChange}
+            className='w-[400px] h-[40px] p-4 rounded-md mt-2'
           />
         </FormControl>
 
@@ -190,13 +197,14 @@ const CourseForm = () => {
             name='duration'
             value={formData.duration}
             onChange={handleChange}
+            className='w-[400px] h-[40px] p-4 rounded-md mt-2'
           />
         </FormControl>
 
         <FormControl isRequired>
           <FormLabel>Level</FormLabel>
           <Select
-            placeholder='Select level'
+            className=' p-4 rounded-md mt-2'
             name='level'
             value={formData.level}
             onChange={handleChange}
@@ -215,6 +223,7 @@ const CourseForm = () => {
             name='topics'
             value={formData.topics}
             onChange={handleChange}
+            className='w-[400px] h-[40px] p-4 rounded-md mt-2'
           />
         </FormControl>
 
@@ -223,6 +232,7 @@ const CourseForm = () => {
           <DatePicker
             selected={formData.schedule.startDate}
             onChange={handleStartDateChange}
+            className='w-[400px] h-[40px] p-4 rounded-md mt-2'
           />
         </FormControl>
 
@@ -231,6 +241,7 @@ const CourseForm = () => {
           <DatePicker
             selected={formData.schedule.endDate}
             onChange={handleEndDateChange}
+            className='w-[400px] h-[40px] p-4 rounded-md mt-2'
           />
         </FormControl>
 
@@ -239,6 +250,7 @@ const CourseForm = () => {
           <TimePicker
             value={formData.schedule.classTime}
             onChange={handleClassTimeChange}
+            className='w-[200px] h-[80px] p-4 rounded-md mt-2'
           />
         </FormControl>
 
@@ -250,10 +262,15 @@ const CourseForm = () => {
             name='classDays'
             value={formData.schedule.classDays}
             onChange={handleClassDaysChange}
+            className='w-[400px] h-[40px] p-4 rounded-md mt-4'
           />
         </FormControl>
 
-        <Button mt={4} colorScheme='teal' type='submit' isLoading={submitting}>
+        <Button
+          className='mt-4 mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+          type='submit'
+          isLoading={submitting}
+        >
           {submitting ? 'Adding...' : 'Upload Course'}
         </Button>
       </Stack>
