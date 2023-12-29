@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { baseUrl } from '../api/url';
 
 const CourseDetails = () => {
   const { courseId } = useParams();
@@ -10,14 +11,11 @@ const CourseDetails = () => {
   const fetchCourseDetails = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(
-        `http://localhost:8080/api/courses/${courseId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${baseUrl}/api/courses/${courseId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setCourse(response.data);
       console.log('response data', response.data);
     } catch (error) {
@@ -27,7 +25,7 @@ const CourseDetails = () => {
 
   useEffect(() => {
     fetchCourseDetails();
-  }, [courseId]); // Added courseId as a dependency to fetch data when it changes
+  }, [courseId]);
 
   return (
     <div>

@@ -5,12 +5,13 @@ import {
   Navigate,
 } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+
 import Login from './components/Login';
 import Registration from './components/Register';
 import Home from './pages/Home';
 import DashBoard from './pages/DashBoard';
 import CourseDetails from './components/CourseDetails';
+import Footer from './components/Footer';
 
 const App = () => {
   const isAuthenticated = !!localStorage.getItem('token');

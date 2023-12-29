@@ -2,9 +2,9 @@ import CourseList from '../components/CourseList';
 
 const Home = () => {
   return (
-    <>
-      <CourseList />
-    </>
+    <div className='w-full h-screen overflow-hidden'>
+      <CourseList className='w-full h-full' />
+    </div>
   );
 };
 

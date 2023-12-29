@@ -15,10 +15,12 @@ import {
 import DatePicker from 'react-datepicker';
 import TimePicker from 'react-time-picker';
 import axios from 'axios';
-import useCourseNameStore from '../store/caourseNames';
+
+import { baseUrl } from '../api/url';
+import useCourseStore from '../store/courseStore';
 
 const CourseForm = () => {
-  const fetchCourses = useCourseNameStore((state) => state.fetchCourses);
+  const fetchCourses = useCourseStore((state) => state.fetchCourses);
   const [formData, setFormData] = useState({
     user_id: '',
     name: '',
@@ -36,14 +38,13 @@ const CourseForm = () => {
   });
 
   useEffect(() => {
-    // Decode the token and extract user details
     const token = localStorage.getItem('token');
     if (token) {
       try {
         const decodedToken = jwtDecode(token, 'shahriar123');
 
         console.log('decoded', decodedToken);
-        // Assuming the token has a field 'userId' with the user ID
+
         const userIdFromToken = decodedToken.user.id;
         setFormData((prevData) => ({
           ...prevData,
@@ -53,7 +54,7 @@ const CourseForm = () => {
         console.error('Token decoding failed:', error);
       }
     }
-  }, []); // Run this effect only once on component mount
+  }, []);
 
   const [submitting, setSubmitting] = useState(false);
 
@@ -108,16 +109,12 @@ const CourseForm = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(
-        'http://localhost:8080/api/courses',
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await axios.post(`${baseUrl}/api/courses`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
       if (response.status === 200) {
         console.log('Course uploaded:', response.data);
@@ -151,7 +148,7 @@ const CourseForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className=''>
       <Stack spacing={4}>
         <FormControl isRequired>
           <FormLabel>Name</FormLabel>

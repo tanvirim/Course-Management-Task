@@ -2,9 +2,9 @@
 
 const CourseCard = ({ course }) => {
   return (
-    <div className='bg-white rounded-lg overflow-hidden shadow-lg p-6'>
+    <div className='bg-gradient-to-br from-purple-400 to-indigo-600 rounded-lg overflow-hidden shadow-lg p-6 text-white'>
       <h3 className='text-2xl font-semibold mb-2'>{course.name}</h3>
-      <p className='text-gray-700 mb-4'>{course.description}</p>
+      <p className='text-gray-100 mb-4'>{course.description}</p>
       <div className='flex items-center mb-4'>
         <span className='mr-2 font-semibold'>Price:</span>
         <span>{course.price}</span>
