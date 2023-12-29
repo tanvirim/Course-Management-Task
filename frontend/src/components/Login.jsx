@@ -23,7 +23,7 @@ const Login = () => {
         autoClose: 3000,
       });
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate, toast]);
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
