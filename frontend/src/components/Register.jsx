@@ -3,7 +3,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../api/url';
 import { toast } from 'react-toastify';
+import { Button } from '@chakra-ui/react';
 const Registration = () => {
+  const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     userName: '',
@@ -18,6 +20,7 @@ const Registration = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
 
     if (!formData.userName || !formData.email || !formData.password) {
       console.error('Please fill in all fields');
@@ -37,9 +40,11 @@ const Registration = () => {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 3000,
         });
+        setSubmitting(false);
       }
     } catch (error) {
       console.error('Registration failed:', error);
+      setSubmitting(false);
     }
   };
 
@@ -116,12 +121,13 @@ const Registration = () => {
                 />
               </div>
 
-              <button
+              <Button
+                className='w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center'
                 type='submit'
-                className='w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'
+                isLoading={submitting}
               >
-                Sign Up
-              </button>
+                {submitting ? 'Registering...' : 'Register'}
+              </Button>
               <p className='text-sm font-light text-gray-500 dark:text-gray-400'>
                 Already Have an Account?{' '}
                 <Link

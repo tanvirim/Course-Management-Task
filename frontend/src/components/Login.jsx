@@ -4,8 +4,10 @@ import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
 import { baseUrl } from '../api/url';
 import { toast } from 'react-toastify';
+import { Button } from '@chakra-ui/react';
 
 const Login = () => {
+  const [submitting, setSubmitting] = useState(false);
   const { login, isLoggedIn } = useAuthStore((state) => state);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,6 +32,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
 
     try {
       const response = await axios.post(`${baseUrl}/api/user/login`, {
@@ -40,12 +43,14 @@ const Login = () => {
       login();
 
       console.log('Login successful:', response.data);
+      setSubmitting(false);
     } catch (error) {
       console.error('Login failed:', error);
       toast.error('Login Failed!', {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
       });
+      setSubmitting(false);
     }
   };
 
@@ -106,12 +111,13 @@ const Login = () => {
                 />
               </div>
 
-              <button
-                type='submit'
+              <Button
                 className='w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center'
+                type='submit'
+                isLoading={submitting}
               >
-                Sign in
-              </button>
+                {submitting ? 'Signing...' : 'Sign in'}
+              </Button>
               <p className='text-sm font-light text-gray-500'>
                 Don’t have an account yet?{' '}
                 <Link
