@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
 import { baseUrl } from '../api/url';
@@ -114,12 +114,12 @@ const Login = () => {
               </button>
               <p className='text-sm font-light text-gray-500'>
                 Don’t have an account yet?{' '}
-                <a
-                  href='register'
+                <Link
+                  to='register'
                   className='font-medium text-primary-600 hover:underline'
                 >
                   Sign up
-                </a>
+                </Link>
               </p>
             </form>
           </div>

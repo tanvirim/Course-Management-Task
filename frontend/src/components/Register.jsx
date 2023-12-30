@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../api/url';
@@ -40,7 +40,6 @@ const Registration = () => {
       }
     } catch (error) {
       console.error('Registration failed:', error);
-      // Handle registration error
     }
   };
 
@@ -125,12 +124,12 @@ const Registration = () => {
               </button>
               <p className='text-sm font-light text-gray-500 dark:text-gray-400'>
                 Already Have an Account?{' '}
-                <a
-                  href='login'
+                <Link
+                  to='login'
                   className='font-medium text-primary-600 hover:underline dark:text-primary-500'
                 >
                   Sign in
-                </a>
+                </Link>
               </p>
             </form>
           </div>
