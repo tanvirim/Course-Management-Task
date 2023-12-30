@@ -155,11 +155,11 @@ const CourseForm = () => {
       onSubmit={handleSubmit}
       className=' p-6 bg-gray-100 rounded-lg shadow-md mt-10'
     >
-      <Flex className='flex flex-col justify-center gap-10'>
+      <Flex className='flex flex-col  gap-10'>
         <p className='text-3xl mx-auto font-bold text-center text-gray-700 '>
           Add Course
         </p>
-        <Flex className='flex gap-2'>
+        <Flex className='flex gap-6 text-xl'>
           <Box className='flex flex-col gap-4'>
             <FormControl isRequired>
               <FormLabel>Name</FormLabel>
