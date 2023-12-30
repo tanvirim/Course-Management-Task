@@ -33,7 +33,6 @@ const CourseNames = () => {
       fetchCourses();
     } catch (error) {
       console.error('Error deleting course:', error);
-      // Handle error scenario
     }
   };
 
@@ -64,17 +63,17 @@ const CourseNames = () => {
         {filteredCourses.map((course) => (
           <li
             key={course._id}
-            className='bg-white flex justify-between items-center py-2 px-4 rounded-lg'
+            className='bg-white flex justify-between items-center py-2 px-4 rounded-lg text-xl'
           >
             <span
               onClick={() => handleCourseClick(course._id)}
-              className='cursor-pointer'
+              className='cursor-pointer hover:text-blue-500'
             >
               {course.name}
             </span>
             <button
               onClick={() => handleDeleteCourse(course._id)}
-              className='ml-4 text-red-500 bg-transparent border border-red-500 rounded-md py-1 px-3 hover:bg-red-500 hover:text-white transition duration-300 ease-in-out'
+              className='ml-4 text-red-500 bg-transparent border border-red-500 rounded-md py-1 px-2 hover:bg-red-500 hover:text-white transition duration-300 ease-in-out'
             >
               Delete
             </button>
