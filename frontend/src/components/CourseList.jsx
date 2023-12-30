@@ -4,11 +4,16 @@ import useCourseStore from '../store/courseStore';
 
 const CourseList = () => {
   const courses = useCourseStore((state) => state.courses);
+
   const fetchCourses = useCourseStore((state) => state.fetchCourses);
 
   useEffect(() => {
     fetchCourses();
   }, [fetchCourses]);
+
+  if (courses.length === 0) {
+    return <div className='text-xl mt-8 ml-[600px]'>Course Loading....</div>;
+  }
 
   return (
     <div className='flex flex-col  items-center'>
