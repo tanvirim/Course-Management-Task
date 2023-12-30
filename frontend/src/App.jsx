@@ -12,9 +12,10 @@ import Home from './pages/Home';
 import DashBoard from './pages/DashBoard';
 import CourseDetails from './components/CourseDetails';
 import Footer from './components/Footer';
+import { useAuthStore } from './store/authStore';
 
 const App = () => {
-  const isAuthenticated = !!localStorage.getItem('token');
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
   return (
     <Router>
@@ -27,7 +28,7 @@ const App = () => {
           <Route
             path='/dashboard'
             element={
-              isAuthenticated ? <DashBoard /> : <Navigate replace to='/login' />
+              isLoggedIn ? <DashBoard /> : <Navigate replace to='/login' />
             }
           />
           <Route path='/course-details/:courseId' element={<CourseDetails />} />

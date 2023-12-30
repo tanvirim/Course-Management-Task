@@ -10,7 +10,7 @@ const Logout = () => {
     logout();
     navigate('/');
     toast.success('logout successfully!', {
-      position: toast.POSITION.TOP_RIGHT,
+      position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 3000,
     });
   };

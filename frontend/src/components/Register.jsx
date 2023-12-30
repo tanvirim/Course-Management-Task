@@ -34,7 +34,7 @@ const Registration = () => {
         console.log('Registration successful:', response.data);
         navigate('/login');
         toast.success('Registration successfully!', {
-          position: toast.POSITION.TOP_RIGHT,
+          position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 3000,
         });
       }

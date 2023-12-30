@@ -11,20 +11,19 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/dashboard');
       toast.success('Login successful!', {
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
       });
     }
-  }, [isLoggedIn, navigate, toast]);
+  }, [isLoggedIn]);
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
@@ -43,6 +42,10 @@ const Login = () => {
       console.log('Login successful:', response.data);
     } catch (error) {
       console.error('Login failed:', error);
+      toast.error('Login Failed!', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 3000,
+      });
     }
   };
 

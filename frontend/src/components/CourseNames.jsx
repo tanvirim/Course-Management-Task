@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useCourseStore from '../store/courseStore';
+import axios from 'axios';
+import { baseUrl } from '../api/url';
 
 const CourseNames = () => {
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const { courses, fetchCourses } = useCourseStore((state) => state);
+
   useEffect(() => {
     fetchCourses();
   }, [fetchCourses]);
@@ -17,6 +20,21 @@ const CourseNames = () => {
 
   const handleCourseClick = (courseId) => {
     navigate(`/course-details/${courseId}`);
+  };
+
+  const handleDeleteCourse = async (courseId) => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.delete(`${baseUrl}/api/courses/${courseId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      fetchCourses();
+    } catch (error) {
+      console.error('Error deleting course:', error);
+      // Handle error scenario
+    }
   };
 
   const handleSearchChange = (e) => {
@@ -46,10 +64,20 @@ const CourseNames = () => {
         {filteredCourses.map((course) => (
           <li
             key={course._id}
-            onClick={() => handleCourseClick(course._id)}
-            className='bg-white py-2 px-4 rounded-lg cursor-pointer hover:bg-gray-100'
+            className='bg-white flex justify-between items-center py-2 px-4 rounded-lg'
           >
-            {course.name}
+            <span
+              onClick={() => handleCourseClick(course._id)}
+              className='cursor-pointer'
+            >
+              {course.name}
+            </span>
+            <button
+              onClick={() => handleDeleteCourse(course._id)}
+              className='ml-4 text-red-500 bg-transparent border border-red-500 rounded-md py-1 px-3 hover:bg-red-500 hover:text-white transition duration-300 ease-in-out'
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>

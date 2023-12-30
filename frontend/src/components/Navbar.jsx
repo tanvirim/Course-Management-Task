@@ -32,60 +32,63 @@ const Navbar = () => {
         </NavLink>
 
         <div id='navbar-default'>
-          <ul className='font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white'>
-            <li>
-              <NavLink
-                to='/'
-                exact
-                className='block py-2 px-3 rounded md:bg-transparent md:p-0'
-                activeClassName='text-white bg-blue-700'
-              >
-                Home
-              </NavLink>
-            </li>
-            {isLoggedIn && (
+          <ul className='font-medium flex gap-[200px]'>
+            <section className='flex gap-6'>
               <li>
                 <NavLink
-                  to='/dashboard'
-                  className='block py-2 px-3 rounded md:hover:bg-transparent md:p-0'
-                  activeClassName='text-gray-900 bg-gray-100'
+                  to='/'
+                  exact
+                  className='block py-2 px-3 rounded md:bg-transparent md:p-0'
+                  activeClassName='text-white bg-blue-700'
                 >
-                  Dashboard
+                  Home
                 </NavLink>
               </li>
-            )}
+              {isLoggedIn && (
+                <li>
+                  <NavLink
+                    to='/dashboard'
+                    className='block py-2 px-3 rounded md:hover:bg-transparent md:p-0'
+                    activeClassName='text-gray-900 bg-gray-100'
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
+            </section>
+            <section className='flex gap-6'>
+              {isLoggedIn && (
+                <li className='text-blue-600'>{userNameFromToken}</li>
+              )}
+              {isLoggedIn && (
+                <li className='text-red-600'>
+                  <Logout />
+                </li>
+              )}
 
-            {isLoggedIn && (
-              <li className='text-blue-600'>{userNameFromToken}</li>
-            )}
-            {isLoggedIn && (
-              <li className='text-red-600'>
-                <Logout />
-              </li>
-            )}
-
-            {!isLoggedIn && (
-              <li>
-                <NavLink
-                  to='/login'
-                  className='block py-2 px-3 rounded md:hover:bg-transparent md:p-0'
-                  activeClassName='text-gray-900 bg-gray-100'
-                >
-                  Login
-                </NavLink>
-              </li>
-            )}
-            {!isLoggedIn && (
-              <li>
-                <NavLink
-                  to='/register'
-                  className='block py-2 px-3 rounded md:hover:bg-transparent md:p-0'
-                  activeClassName='text-gray-900 bg-gray-100'
-                >
-                  Register
-                </NavLink>
-              </li>
-            )}
+              {!isLoggedIn && (
+                <li>
+                  <NavLink
+                    to='/login'
+                    className='block py-2 px-3 rounded md:hover:bg-transparent md:p-0'
+                    activeClassName='text-gray-900 bg-gray-100'
+                  >
+                    Login
+                  </NavLink>
+                </li>
+              )}
+              {!isLoggedIn && (
+                <li>
+                  <NavLink
+                    to='/register'
+                    className='block py-2 px-3 rounded md:hover:bg-transparent md:p-0'
+                    activeClassName='text-gray-900 bg-gray-100'
+                  >
+                    Register
+                  </NavLink>
+                </li>
+              )}
+            </section>
           </ul>
         </div>
       </div>
