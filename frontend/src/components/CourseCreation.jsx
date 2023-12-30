@@ -137,7 +137,7 @@ const CourseForm = () => {
           },
         });
         toast.success('Course added successfully!', {
-          position: toast.POSITION.TOP_RIGHT,
+          position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 3000,
         });
       } else {
